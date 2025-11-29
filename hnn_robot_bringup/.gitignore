@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+
+# ROS 2 build/install/log
+build/
+install/
+log/
+
+# Gazebo cache
+.gazebo/
+
+# VSCode
+.vscode/
+
+# Misc
+*.swp
+*.tmp

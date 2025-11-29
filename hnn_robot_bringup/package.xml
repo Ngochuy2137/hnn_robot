@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>hnn_robot_bringup</name>
+  <version>0.0.0</version>
+  <description>Bringup launch files for Hnn robot simulation and real robot</description>
+  <maintainer email="n.huy@hnn.co.jp">huynn</maintainer>
+  <license>TODO: License declaration</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>hnn_robot_description</depend>
+  <depend>hnn_robot_control</depend>
+  <depend>xacro</depend>
+  <depend>robot_state_publisher</depend>
+  <depend>ros_gz_sim</depend>
+  <depend>ros_gz_bridge</depend>
+  <depend>ros_gz</depend>
+  <depend>ros_gz_image</depend>
+  <depend>controller_manager</depend>
+  <depend>nav2_bringup</depend>
+  <depend>nav2_common</depend>
+  <depend>slam_toolbox</depend>
+  <exec_depend>rviz2</exec_depend>
+  
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

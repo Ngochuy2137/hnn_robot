@@ -1,0 +1,25 @@
+# controller_manager provides the necessary infrastructure to manage multiple controllers
+# efficiently and robustly using ROS 2 Control.
+controller_manager:
+  ros__parameters:
+    update_rate: 100 # update_rate specifies how often (in Hz) the controllers should be updated.
+ 
+    diff_drive_controller:
+      type: diff_drive_controller/DiffDriveController
+    
+    # Responsible for publishing the current state of the robot's joints to the /joint_states ROS 2 topic
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+ 
+# Define the parameters for each controller
+diff_drive_controller:
+  # refer: https://control.ros.org/jazzy/doc/ros2_controllers/diff_drive_controller/doc/userdoc.html
+  ros__parameters:
+    left_wheel_names: ['left_wheel_joint']
+    right_wheel_names: ['right_wheel_joint']
+    wheel_radius: 0.0985
+    wheel_separation: 0.3838
+    base_frame_id: 'base_footprint'
+    twist_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.01]
+    pose_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.01]
+    use_stamped_vel: false

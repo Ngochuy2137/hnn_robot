@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="ros2_control_and_gazebo_plugin" 
+                params="left_joint:=left_wheel_joint 
+                        right_joint:=right_wheel_joint
+                        use_gazebo:=false
+                        ros2_ctrl_yaml_path
+                        robot_type:=hnn_diff_robot
+                        ">
+
+        <ros2_control name="RobotSystem" type="system">
+            <hardware>
+                <xacro:if value="${use_gazebo}">
+                    <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+                </xacro:if>
+                <xacro:unless value="${use_gazebo}">
+                    <!-- Select plugin and parameters based on robot_type -->
+                    <xacro:if value="${robot_type == 'hnn_diff_robot'}">
+                        <plugin>hnn_robot_control/HnnDiffRobotHardware</plugin>
+                        <param name="example_param_hw_start_duration_sec">0</param>
+                        <param name="example_param_hw_stop_duration_sec">3.0</param>
+                        <!-- TODO: Add Hnn Diff specific parameters here -->
+                        <!-- Example:
+                        <param name="serial_port">/dev/ttyUSB0</param>
+                        <param name="baud_rate">115200</param>
+                        -->
+                    </xacro:if>
+                    <!-- TODO: Add more robot types here -->
+                    <!-- Example for future robot types:
+                    <xacro:if value="${robot_type == 'hnn_xyz'}">
+                        <plugin>hnn_robot_control/HnnXyzHardware</plugin>
+                        <param name="example_param_hw_start_duration_sec">0</param>
+                        <param name="example_param_hw_stop_duration_sec">3.0</param>
+                        <param name="xyz_specific_param">value</param>
+                    </xacro:if>
+                    -->
+                </xacro:unless>
+            </hardware>
+
+            <joint name="${left_joint}">
+                <command_interface name="velocity">
+                    <param name="min">-10</param>
+                    <param name="max">10</param>
+                </command_interface>
+                <state_interface name="position" />
+                <state_interface name="velocity" />
+            </joint>
+            <joint name="${right_joint}">
+                <command_interface name="velocity">
+                    <param name="min">-10</param>
+                    <param name="max">10</param>
+                </command_interface>
+                <state_interface name="velocity" />
+                <state_interface name="position" />
+            </joint>
+        </ros2_control>
+
+        <xacro:if value="${use_gazebo}">
+            <gazebo>
+                <!-- <plugin filename="libgz_ros2_control-system.so" name="gz_ros2_control::GazeboSimROS2ControlPlugin"> -->
+                <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+                    <!-- <parameters>$(find pkg hnn_robot_control)/config/ros2_controllers.yaml</parameters> -->
+                    <parameters>${ros2_ctrl_yaml_path}</parameters>
+                    <ros>
+                        <!-- <remapping>/controller_manager/robot_description:=/robot_description</remapping> -->
+                        <remapping>/diff_drive_controller/cmd_vel:=/cmd_vel</remapping>
+                        <remapping>/diff_drive_controller/odom:=/odom</remapping>
+                    </ros>
+                </plugin>
+            </gazebo>
+        </xacro:if>
+    </xacro:macro>
+</robot>
+

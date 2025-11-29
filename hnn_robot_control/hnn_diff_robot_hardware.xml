@@ -1,0 +1,11 @@
+<library path="hnn_robot_control">
+  <class name="hnn_robot_control/HnnDiffRobotHardware"
+         type="hnn_robot_control::HnnDiffRobotHardware"
+         base_class_type="hardware_interface::SystemInterface">
+    <description>
+      Hardware interface for real Hnn Diff robot. Uses velocity command interface and position/velocity state interfaces. 
+      This is the hardware interface implementation for Hnn Diff differential-drive robot.
+    </description>
+  </class>
+</library>
+
