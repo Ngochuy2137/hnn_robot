@@ -1,8 +1,6 @@
-# Hnn Robot Bringup
+# Hnn Robot
 
-Bringup launch files for Hnn robot simulation and real robot deployment.
-
-This package provides high-level launch files that integrate:
+This repo provides a ROS 2 Jazzy meta package for mobile robot platforms that utilize the ros2_control framework for hardware abstraction, control, and simulation. The repo provides high-level launch files that integrate:
 - **hnn_robot_description**: Robot URDF/xacro files
 - **hnn_robot_control**: Hardware interfaces and ros2_control configuration
 - **Navigation**: Navigation configuration, launch files, and maps
@@ -109,9 +107,7 @@ This project is licensed under the [MIT License](LICENSE).
 ---
 
 ### Author
-**Hnn Inc.**
-
-For more info, visit: [https://hnn-motor.com](https://hnn-motor.com)
+**Huynn (huy.nguyenngoc2137@gmail.com)**
 
 ---
 
